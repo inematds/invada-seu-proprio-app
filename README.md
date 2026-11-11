@@ -42,3 +42,7 @@ Use os [prompts de teste simulado e relatório visual](kit/prompts/pentest-do-se
 [Endereço do guia](https://inematds.github.io/invada-seu-proprio-app/guia/) — referência de publicação; a página do guia não faz parte deste kit.
 
 Python 3, sem dependências adicionais. Conteúdo autoral. Licença [MIT](LICENSE).
+
+## Vídeo
+
+[Assista no YouTube](https://www.youtube.com/watch?v=UDAJ66IITq0) · [Short 9:16](https://youtube.com/shorts/FeB3cM4KULo) · [Player com legendas e capítulos](https://inematds.github.io/invada-seu-proprio-app/videos/)

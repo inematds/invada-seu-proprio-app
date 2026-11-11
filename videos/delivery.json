@@ -1,0 +1,12 @@
+{
+  "16x9": {
+    "url": "https://github.com/inematds/invada-seu-proprio-app/releases/download/video-v1.0.0/invada-seu-proprio-app-16x9.mp4",
+    "srt": "https://github.com/inematds/invada-seu-proprio-app/releases/download/video-v1.0.0/invada-seu-proprio-app-16x9.srt",
+    "duration": 245.701333
+  },
+  "9x16": {
+    "url": "https://github.com/inematds/invada-seu-proprio-app/releases/download/video-v1.0.0/invada-seu-proprio-app-9x16.mp4",
+    "srt": "https://github.com/inematds/invada-seu-proprio-app/releases/download/video-v1.0.0/invada-seu-proprio-app-9x16.srt",
+    "duration": 245.701333
+  }
+}
