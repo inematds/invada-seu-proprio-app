@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exemplo sem os indícios buscados — kit defensivo</title>
+<body>
+<p><strong>Uso defensivo:</strong> só teste aplicativos que são SEUS ou que você tem permissão escrita para testar, sempre numa cópia de teste (staging/sandbox), nunca em produção com clientes. Este kit é para PROTEGER, não para invadir os outros.</p>
+<h1>Exemplo sem os indícios buscados</h1>
+<p>Produto de demonstração: R$ 100,00. O servidor deve calcular o valor; este arquivo não tem backend ou cobrança.</p>
+<label>Avaliação de teste <textarea name="review">Teste &lt;b&gt;visível&lt;/b&gt;</textarea></label>
+<p id="previa"></p>
+<script>
+const campo = document.querySelector('textarea');
+const previa = document.querySelector('#previa');
+function atualizar() { previa.textContent = campo.value; }
+campo.addEventListener('input', atualizar);
+atualizar();
+</script>
+<p>A prévia usa texto. Não há envio. Ausência de indícios neste arquivo não atesta segurança de um app real.</p>
+<p>Cabeçalhos HTTP dependem do servidor e são fornecidos separadamente nos testes offline. Uma CSP real precisa autorizar este script com nonce ou hash, ou servir o script em arquivo permitido.</p>
+</body>
+</html>

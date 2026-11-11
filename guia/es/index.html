@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<!-- TEMPLATE projetos-landing-guia. Troque campos de conteúdo e o conteudo. NAO reescreva o CSS.
+     TRILINGUE: este arquivo e a versao ES (guia/es/index.html). As versoes guia/index.html (PT) e
+     guia/en/index.html sao copias traduzidas: lang="pt-BR"/"en", seletor com a.on no idioma,
+     hrefs do seletor ../ e ../en/ (ou ./), e imagens assets/ -> ../assets/. -->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Invada seu próprio app — encuentra y cierra las brechas de tu app</title>
+<meta name="description" content="Kit defensivo para quien construyó una app con IA: prueba tu propia app en una copia de prueba, encuentra las cinco brechas más comunes y corrige antes de publicar.">
+<link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/invada-seu-proprio-app/guia/">
+<link rel="alternate" hreflang="en" href="https://inematds.github.io/invada-seu-proprio-app/guia/en/">
+<link rel="alternate" hreflang="es" href="https://inematds.github.io/invada-seu-proprio-app/guia/es/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#E2A23B; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
+    color-scheme:dark;
+  }
+  body.light{
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#b9791d; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
+    color-scheme:light;
+  }
+  body.light .hero .glow{opacity:.5}
+  body.light pre{background:#0e0e14;color:#d6d6e0}
+  body.light pre .c{color:#8a8a98}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
+  a{color:var(--amb);text-decoration:none}
+  code,pre{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .mut{color:var(--mut)} .amb{color:var(--amb)}
+  .chip{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
+  nav .brand .emoji{font-size:1.25rem}
+  nav .sep{color:var(--mut);opacity:.45}
+  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .inema:hover{filter:brightness(1.15)}
+  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .pro:hover{filter:brightness(1.15)}
+  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
+  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
+  nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
+  .lang{display:inline-flex;gap:2px;font-family:Sora;font-size:.78rem}
+  .lang a{color:var(--mut);padding:.2em .45em;border-radius:6px} .lang a.on{color:var(--amb);background:rgba(226,162,59,.12)}
+  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .tgl:hover{border-color:var(--amb)}
+  .btn{display:inline-block;background:var(--amb);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  @media(max-width:760px){nav .links a.sec{display:none}}
+  @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(226,162,59,.22),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:74px 22px}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.025em}
+  .hero p.lead{font-size:1.18rem;color:var(--mut);margin:1.1em 0 1.6em;max-width:34ch}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .hero figure img{width:100%;height:auto;display:block}
+  .resumo{padding:38px 0 34px;border-bottom:1px solid var(--line)}
+  .resumo p{font-size:1.12rem;line-height:1.7;max-width:74ch;margin:.55em 0 0}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;padding:48px 22px}}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:62ch}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-size:1.05rem;margin-bottom:.4em}
+  .card p{color:var(--mut);font-size:.92rem;margin:0}
+  .num{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:8px;background:rgba(226,162,59,.14);color:var(--amb);font-family:Sora;font-weight:800;font-size:.9rem;margin-bottom:.7em}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .flow span{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:.45em .9em;font-size:.85rem;font-family:Sora;font-weight:600}
+  .flow .arr{color:var(--amb);border:none;background:none;padding:0 .1em}
+  pre{background:#0a0a0e;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font-size:.86rem;line-height:1.6;color:#d6d6e0}
+  pre .c{color:#6f6f7c} pre .k{color:var(--amb2)} pre .s{color:#9ece6a}
+  .step{display:grid;grid-template-columns:46px minmax(0,1fr);gap:16px;margin-bottom:26px}
+  .step>div,.card{min-width:0}
+  p code,li code,td code{overflow-wrap:anywhere}
+  .step .b{width:46px;height:46px;border-radius:12px;background:var(--amb);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.12rem;margin-bottom:.3em}
+  .step p{color:var(--mut);margin:.2em 0 .7em}
+  .ex{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.ex{grid-template-columns:1fr}}
+  .ex figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .ex figure img{width:100%;height:auto;display:block}
+  .ex figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut);background:var(--card)}
+  .phase{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border:none}
+  .phase .tag{flex:0 0 92px;font-family:Sora;font-weight:800;color:var(--amb)}
+  .phase .d strong{display:block;margin-bottom:.2em}
+  .phase .d span{color:var(--mut);font-size:.92rem}
+  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="#top"><span class="emoji">🛡️</span> Invada seu próprio app</a>
+  <span class="sep">|</span>
+  <span class="clubpro">
+    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <span class="sep">-</span>
+    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+  </span>
+  <div class="links">
+    <a class="sec" href="#oque">Qué es</a>
+    <a class="sec" href="#fluxo">Cómo funciona</a>
+    <a class="sec" href="#guia">Guía de uso</a>
+    <a class="sec" href="#exemplos">Ejemplos</a>
+    <a class="sec" href="#roadmap">Roadmap</a>
+    <span class="lang"><a href="../">PT</a><a href="../en/">EN</a><a class="on" href="./">ES</a></span>
+    <button class="tgl" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">🌙</button>
+    <a class="btn" href="https://github.com/inematds/invada-seu-proprio-app" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div>
+      <span class="chip">Kit defensivo · prueba TU app</span>
+      <h1>Invádete a ti mismo antes de que <span class="amb">invadan</span> tu app</h1>
+      <p class="lead">¿Construiste una app con IA y no sabes qué quedó expuesto? Ejecuta la verificación, sigue las cinco brechas y cierra las puertas — todo en una copia de prueba, sin tocar la producción.</p>
+      <div class="cta">
+        <a class="btn" href="#guia">Empezar la guía</a>
+        <a class="btn ghost" href="https://github.com/inematds/invada-seu-proprio-app" target="_blank" rel="noopener">Ver en GitHub</a>
+      </div>
+    </div>
+    <figure><img src="../assets/banner-es.jpg" alt="Banner del kit defensivo Invada seu próprio app"></figure> <!-- banner via gerar-banner.sh; se falhou, use assets/hero.png -->
+  </div>
+</header>
+
+<!-- OBRIGATORIO: texto breve que explica o que e o projeto, logo abaixo da hero. 3 a 5 frases
+     simples, sem jargao: o que e, para quem serve, que problema resolve e o que precisa para usar.
+     Quem nunca ouviu falar do projeto tem que entender so lendo este paragrafo. -->
+<section id="resumo" class="resumo"><div class="wrap">
+  <span class="chip">En resumen</span>
+  <p>Invada seu próprio app es un kit de revisión defensiva con un verificador, cinco guías de brechas y prompts para organizar los resultados. Es para quien construyó una app con IA y sabe editar el proyecto, pero no trabaja con seguridad todos los días. Ayuda a buscar señales de fallas, corregir las reglas de la app y revisar el resultado antes de publicar. Para usarlo, necesitas una copia aislada de tu app, datos inventados, dos cuentas ficticias y Python 3.</p>
+</div></section>
+
+<section id="oque"><div class="wrap">
+  <span class="chip">Qué es</span>
+  <h2>Qué es</h2>
+  <p class="sub">Una ruta para revisar tu app, corregir una falla a la vez y registrar lo que fue confirmado.</p>
+  <figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="../assets/banner-grade-es.jpg" alt="Panel ilustrado de las cinco brechas que aborda el kit defensivo" loading="lazy" style="width:100%;display:block"></figure> <!-- 2º banner (gerar-banner.sh --estilo grade --saida banner-grade); se falhou, remova esta figure -->
+  <div class="grid g3">
+    <div class="card"><h3>🛡️ Verificación no destructiva</h3><p>Una única petición de lectura busca señales en el HTML y en el JavaScript inline, sin login, formularios ni redirecciones.</p></div>
+    <div class="card"><h3>🛡️ Cinco brechas con corrección</h3><p>Cada guía explica el problema, un escenario controlado, la corrección y cómo confirmar el resultado.</p></div>
+    <div class="card"><h3>🛡️ Prompts listos</h3><p>Organiza una prueba de intrusión simulada y un informe visual con evidencias, límites y prioridades.</p></div>
+  </div>
+</div></section>
+
+<section id="fluxo"><div class="wrap">
+  <span class="chip">Cómo funciona</span>
+  <h2>Cómo funciona</h2>
+  <p class="sub">Empieza en una copia aislada, revisa las reglas y repite tanto el escenario rechazado como el uso legítimo.</p>
+  <div class="flow">
+    <span>Preparar copia</span><span class="arr">→</span>
+    <span>Ejecutar checa</span><span class="arr">→</span>
+    <span>Leer las brechas</span><span class="arr">→</span>
+    <span>Corregir en el servidor</span><span class="arr">→</span>
+    <span>Confirmar</span>
+  </div>
+</div></section>
+
+<section id="pre"><div class="wrap">
+  <span class="chip">Requisitos previos</span>
+  <h2>Requisitos previos</h2>
+  <p class="sub">Prepara la copia de prueba y abre la terminal en la carpeta del proyecto; el verificador usa Python 3, sin dependencias adicionales.</p>
+  <div class="grid g3">
+    <div class="card"><h3>Copia aislada de la app</h3><p>Staging es una copia para pruebas. Usa datos inventados, cuentas A y B, correo de prueba y pagos simulados; desactiva integraciones externas y haz un backup de la copia.</p><pre><span class="c"># Checklist antes de cualquier acceso</span>
+URL y rutas autorizadas
+Cuentas ficticias A y B
+Correo y pago de prueba
+Backup de la copia</pre></div>
+    <div class="card"><h3>Python 3</h3><p>Verifica la instalación en la terminal; no es necesario instalar paquetes adicionales.</p><pre><span class="k">python3</span> --version</pre></div>
+    <div class="card"><h3>Archivos del kit</h3><p>Abre la terminal en la raíz de este repositorio, donde está la carpeta kit, y consulta las opciones reales del verificador.</p><pre><span class="k">python3</span> kit/scripts/checa.py --help</pre></div>
+  </div>
+</div></section>
+
+<section id="guia"><div class="wrap">
+  <span class="chip">Guía de uso · paso a paso</span>
+  <h2>Guía de uso</h2>
+  <p class="sub">Sigue los seis pasos en tu copia de prueba. La dirección de los comandos es ilustrativa: cámbiala por la URL autorizada de tu app.</p>
+
+  <div class="step"><div class="b">1</div><div>
+    <h3>Prepara staging</h3>
+    <p>Lee <a href="https://github.com/inematds/invada-seu-proprio-app/blob/main/kit/COMECE-AQUI.md">COMECE AQUI (en portugués)</a>. Registra autorización, URL, rutas permitidas y responsable. Confirma los requisitos previos de arriba; nunca uses producción.</p>
+<pre><span class="c"># Lee las instrucciones locales antes de probar</span>
+<span class="k">cat</span> kit/COMECE-AQUI.md</pre>
+  </div></div>
+  <div class="step"><div class="b">2</div><div>
+    <h3>Ejecuta la verificación</h3>
+    <p>Sustituye la URL por la de tu copia aislada. La flag declara tu permiso; el script no comprueba propiedad ni aislamiento. Hace un único GET, no sigue redirecciones y solo lee el HTML y el JavaScript inline de la respuesta. Una señal no confirma una falla; la ausencia de señales no prueba seguridad.</p>
+<pre><span class="k">python3</span> kit/scripts/checa.py --url <span class="s">https://staging.seu-app.test</span> --eu-tenho-permissao
+<span class="c"># Opcional: agrega --json para una salida estructurada</span></pre>
+  </div></div>
+  <div class="step"><div class="b">3</div><div>
+    <h3>Lee las cinco brechas</h3>
+    <p>Sigue los documentos del 01 al 05 y registra evidencias sin contraseñas, tokens ni datos personales.</p><ol><li><a href="https://github.com/inematds/invada-seu-proprio-app/blob/main/kit/brechas/01-reset-de-senha.md">Restablecimiento de contraseña (en portugués)</a></li><li><a href="https://github.com/inematds/invada-seu-proprio-app/blob/main/kit/brechas/02-avaliacoes-e-comentarios.md">Reseñas y comentarios (en portugués)</a></li><li><a href="https://github.com/inematds/invada-seu-proprio-app/blob/main/kit/brechas/03-chatbot-do-site.md">Chatbot del sitio (en portugués)</a></li><li><a href="https://github.com/inematds/invada-seu-proprio-app/blob/main/kit/brechas/04-checkout-e-preco.md">Checkout y precio (en portugués)</a></li><li><a href="https://github.com/inematds/invada-seu-proprio-app/blob/main/kit/brechas/05-email-e-agente.md">Correo y agente (en portugués)</a></li></ol>
+<pre><span class="c"># Lee los cinco documentos en la terminal, si prefieres</span>
+<span class="k">cat</span> kit/brechas/*.md</pre>
+  </div></div>
+  <div class="step"><div class="b">4</div><div>
+    <h3>Aplica la corrección en el servidor</h3>
+    <p>Adapta los pseudocódigos a tu app, un cambio a la vez, incluyendo rutas alternativas. Para los comentarios, revisa también el renderizado seguro en todas las pantallas. Repite el escenario rechazado y el flujo legítimo; revisa la base de datos, los logs y el estado final.</p>
+<pre><span class="c"># No existe un comando universal de corrección.</span>
+<span class="c"># Registro de cada hallazgo:</span>
+brecha · ruta · cuenta ficticia · evidencia
+riesgo · corrección · reprueba · responsable</pre>
+  </div></div>
+  <div class="step"><div class="b">5</div><div>
+    <h3>Usa el prompt en una copia de prueba</h3>
+    <p>Abre el <a href="https://github.com/inematds/invada-seu-proprio-app/blob/main/kit/prompts/pentest-do-seu-app.md">prompt de pentest e informe visual (en portugués)</a>. Copia el bloque e indica URL, rutas permitidas y aislamiento antes de cualquier acceso. Empieza por la lectura del código y las verificaciones pasivas; los cambios de estado deben ser escenarios simulados o pruebas locales ejecutadas por ti.</p>
+<pre><span class="k">cat</span> kit/prompts/pentest-do-seu-app.md</pre>
+  </div></div>
+  <div class="step"><div class="b">6</div><div>
+    <h3>Revisa el kit</h3>
+    <p>Ejecuta las pruebas offline del verificador. No validan la seguridad de tu app: esa confirmación depende de las repruebas en staging y de las evidencias de cada brecha.</p>
+<pre><span class="k">python3</span> kit/testes/run.py</pre>
+  </div></div>
+</div></section>
+
+<section id="exemplos"><div class="wrap">
+  <span class="chip">Ejemplos</span>
+  <h2>Las cinco brechas</h2>
+  <p class="sub">Para cada una, marca: aplicable, no aplicable o pendiente. Abre el documento para ver el escenario de prueba y la reprueba.</p>
+  <div class="grid g3">
+    <div class="card"><h3><a href="https://github.com/inematds/invada-seu-proprio-app/blob/main/kit/brechas/01-reset-de-senha.md">Restablecimiento de contraseña (en portugués)</a></h3><p>Un ID enviado por el navegador puede elegir la cuenta equivocada al cambiar la contraseña. <strong>Corrección:</strong> En el servidor, deriva la cuenta solo del token, con expiración y consumo único, impidiendo dos usos simultáneos.</p></div>
+    <div class="card"><h3><a href="https://github.com/inematds/invada-seu-proprio-app/blob/main/kit/brechas/02-avaliacoes-e-comentarios.md">Reseñas y comentarios (en portugués)</a></h3><p>El contenido guardado puede interpretarse como código en el navegador de quien lo lee. <strong>Corrección:</strong> Muestra los comentarios como texto y, si permites formato, filtra etiquetas y atributos con un sanitizador basado en una lista de permitidos.</p></div>
+    <div class="card"><h3><a href="https://github.com/inematds/invada-seu-proprio-app/blob/main/kit/brechas/03-chatbot-do-site.md">Chatbot del sitio (en portugués)</a></h3><p>Las peticiones fuera del negocio pueden consumir tu cuota de respuestas. <strong>Corrección:</strong> Valida el asunto antes de responder e impón en el servidor límites de uso y presupuesto independientes del modelo.</p></div>
+    <div class="card"><h3><a href="https://github.com/inematds/invada-seu-proprio-app/blob/main/kit/brechas/04-checkout-e-preco.md">Checkout y precio (en portugués)</a></h3><p>El servidor puede aceptar como precio final un valor alterado por el comprador. <strong>Corrección:</strong> Calcula el total en el servidor y verifica pedido, valor, moneda y estado en la confirmación del pago.</p></div>
+    <div class="card"><h3><a href="https://github.com/inematds/invada-seu-proprio-app/blob/main/kit/brechas/05-email-e-agente.md">Correo y agente (en portugués)</a></h3><p>El agente puede confundir instrucciones recibidas por correo con órdenes del dueño. <strong>Corrección:</strong> Trata los mensajes como datos, limita los permisos y exige confirmación humana para acciones sensibles en el ejecutor.</p></div>
+  </div>
+</div></section>
+
+<section id="roadmap"><div class="wrap">
+  <span class="chip">Roadmap</span>
+  <h2>Roadmap</h2>
+  <p class="sub">El kit documenta lo que está disponible hoy; nuevas brechas y modo CI no están implementados ni tienen plazo definido.</p>
+  <div class="phase"><div class="tag">Hoy</div><div class="d"><strong>Cinco brechas + verificación pasiva</strong><span>Guías de corrección, verificador con salida en texto o JSON, prompts de revisión e informe, ejemplos locales y pruebas offline.</span></div></div>
+  <div class="phase"><div class="tag">Por evaluar</div><div class="d"><strong>Más brechas e integración continua</strong><span>Posibles evoluciones, sin compromiso de entrega: ampliar los escenarios y un modo CI, para verificaciones automáticas en cada cambio del proyecto.</span></div></div>
+</div></section>
+
+<footer>
+  <div class="wrap">
+    <div class="pill">Python</div><div class="pill">HTML</div><div class="pill">Sin dependencias</div>
+    <p style="margin-top:18px">Invada seu próprio app · Uso defensivo: solo tu app o con permiso escrito, en una copia de prueba aislada; nunca en producción ·
+      <a href="https://github.com/inematds/invada-seu-proprio-app">inematds/invada-seu-proprio-app</a> ·
+      <a href="https://inema.club">INEMA.CLUB</a></p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var KEY='invada-seu-proprio-app-theme'; // troque invada-seu-proprio-app pelo nome do projeto
+    var b=document.body, t=document.getElementById('themeToggle');
+    if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; }
+    t.addEventListener('click',function(){
+      var light=b.classList.toggle('light');
+      t.textContent=light?'☀️':'🌙';
+      localStorage.setItem(KEY, light?'light':'dark');
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exemplo com indícios — kit defensivo</title>
+<body>
+<p><strong>Uso defensivo:</strong> só teste aplicativos que são SEUS ou que você tem permissão escrita para testar, sempre numa cópia de teste (staging/sandbox), nunca em produção com clientes. Este kit é para PROTEGER, não para invadir os outros.</p>
+<h1>Exemplo com indícios</h1>
+<p>Documento local, sem backend, sem envio e sem execução de conteúdo recebido. Os campos abaixo ilustram sinais; não demonstram exploração.</p>
+<form onsubmit="return false">
+<label>Conta de teste <input name="account_id" value="conta-ficticia-A"></label>
+<label>Espaço de teste <input name="workspace_id" value="espaco-ficticio"></label>
+<label>Preço informado pelo cliente <input name="price" value="100"></label>
+<label>Avaliação <textarea name="review">Comentário de teste</textarea></label>
+</form>
+<script type="application/json" id="configuracao-demonstrativa">
+{"super_admin": false, "price": 100}
+</script>
+<p>Nenhum botão envia dados. Uma configuração exposta não concede permissões por si só.</p>
+</body>
+</html>
